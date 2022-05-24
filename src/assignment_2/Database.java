@@ -33,7 +33,8 @@ public class Database {
                 statement.executeUpdate("CREATE TABLE " + userTable + " (userid VARCHAR(12), password VARCHAR(12), score INT)");
             }
             if (!checkTableExisting(questionTable)) {
-                statement.executeUpdate("CREATE TABLE " + questionTable + " (questionID INT, question VARCHAR(50), answer INT)");
+                statement.executeUpdate("CREATE TABLE " + questionTable + " (questionID INT, question VARCHAR(50), answer VARCHAR(1))");
+                populateQuestionTable();
             }
             statement.close();
 
@@ -96,14 +97,35 @@ public class Database {
                         + "VALUES('" + username + "', '" + password + "', 0)");
                 data.currentScore = 0;
                 data.loginFlag = true;
-
             }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return data;
 
+    }
+
+    public Data getQuestion(int questionID) {
+        Data data = new Data();
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT questionID, question, answer FROM QNA "
+                    + "WHERE questionID = '" + questionID + "'");
+            if (rs.next()) {
+                String question = rs.getString("question");
+                String answer = rs.getString("answer");
+                data.question = question;
+                data.answer = answer;
+                System.out.println("> FOUND question: " + question + " & answer: " + answer);
+            }
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
-
     }
 
     void quitGame(int score, String username) {
@@ -112,11 +134,37 @@ public class Database {
         try {
             statement = conn.createStatement();
             statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public void populateQuestionTable() {
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate("INSERT INTO QNA "
+                    + "VALUES('1', 'Captial of New Zealand is?', A),"
+                    + "('1', 'The hammer and sickle is one of the most recognisable symbols of which political ideology?', B),"
+                    + "('2', 'Obstetrics is a branch of medicine particularly concerned with what?', A),"
+                    + "('3', 'Construction of which of these famous landmarks was completed first?', D),"
+                    + "('4', 'What was the first Star Wars Movie released?', A),"
+                    + "('5', 'Who won the English Football Premier League in 2019?', C),"
+                    + "('6', 'In 1718, which pirate died in battle off the coast of what is now North Carolina?', B),"
+                    + "('7', 'Which toys have been marketed with the phrase “robots in disguise?', C),"
+                    + "('8', 'What name is given to the revolving belt machinery in an airport that delivers checked luggage from the plane to baggage reclaim?', D),"
+                    + "('9', 'Which Disney character famously leaves a glass slipper behind at a royal ball?', C),"
+                    + "('10', 'Who coded this Assignment?', A),"
+                    + "('11', 'How old must you be to enter Bar101 in NZ?', B),"
+                    + "('12', 'What is the name of Darth Vaders' Son?', C),"
+                    + "('13', 'In the UK, the abbreviation NHS stands for National X Service?', B),"
+                    + "('14', 'Who is Spiderman?', C),"
+                    + "('15', 'What does the word loquacious mean?', B)");
 
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
 }
