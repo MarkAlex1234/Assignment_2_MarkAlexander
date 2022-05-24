@@ -26,6 +26,8 @@ public class View extends JFrame implements Observer {
     public JFrame gameFrame = new JFrame("Game - Play");
     public JFrame helpFrame = new JFrame("Game - Help");
 
+    private RandomManager rm = new RandomManager();
+
     public View() {
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 300);
@@ -53,10 +55,50 @@ public class View extends JFrame implements Observer {
         helpFrame.setVisible(true);
     }
 
-    public void setQuestion(String q, String a) {
-        gamePanel.questionTextField.setText(q);
-        gamePanel.answer1TextField.setText(a);
-        calcPanel.repaint();
+    public void setQuestion(String question, String answer, String[] answerArray) {
+        gamePanel.questionTextField.setText(question);
+        switch (answer) {
+            case "A":
+                //CORRECT ANSWER
+                gamePanel.answer1TextField.setText(answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
+                //INCORRECT ANSWERS
+                gamePanel.answer2TextField.setText(answerArray[1]);
+                gamePanel.answer3TextField.setText(answerArray[2]);
+                gamePanel.answer4TextField.setText(answerArray[3]);
+                break;
+            case "B":
+                //CORRECT ANSWER
+                gamePanel.answer2TextField.setText(answerArray[0]);
+                //INCORRECT ANSWERS
+                gamePanel.answer1TextField.setText(answerArray[1]);
+                gamePanel.answer3TextField.setText(answerArray[2]);
+                gamePanel.answer4TextField.setText(answerArray[3]);
+                break;
+            case "C":
+                //CORRECT ANSWER
+                gamePanel.answer3TextField.setText(answerArray[0]);
+                //INCORRECT ANSWERS
+                gamePanel.answer1TextField.setText(answerArray[1]);
+                gamePanel.answer2TextField.setText(answerArray[2]);
+                gamePanel.answer4TextField.setText(answerArray[3]);
+                break;
+            case "D":
+                //CORRECT ANSWER
+                gamePanel.answer4TextField.setText(answerArray[0]);
+                //INCORRECT ANSWERS
+                gamePanel.answer1TextField.setText(answerArray[1]);
+                gamePanel.answer2TextField.setText(answerArray[2]);
+                gamePanel.answer3TextField.setText(answerArray[3]);
+                break;
+            default:
+                //CORRECT ANSWER
+                gamePanel.answer1TextField.setText(answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
+                //INCORRECT ANSWERS
+                gamePanel.answer2TextField.setText(answerArray[1]);
+                gamePanel.answer3TextField.setText(answerArray[2]);
+                gamePanel.answer4TextField.setText(answerArray[3]);
+        }
+        gamePanel.repaint();
     }
 
     public void addActionListener(ActionListener listener) {
@@ -100,7 +142,7 @@ public class View extends JFrame implements Observer {
             this.loginFrame.setVisible(false);
             this.startQuiz();
             data.started = true;
-            this.setQuestion(data.question, data.answer);
+            this.setQuestion(data.question, data.answer, data.answerArray);
         } else if (data.quitFlag) {
             this.loginFrame.dispose();
             this.gameFrame.dispose();
@@ -112,7 +154,7 @@ public class View extends JFrame implements Observer {
         } else if (!data.helpFlag) {
             this.helpFrame.dispose();
         } else {
-            this.setQuestion(data.question, data.answer);
+            this.setQuestion(data.question, data.answer, data.answerArray);
         }
     }
 }

@@ -16,6 +16,7 @@ public class Data {
     int num2 =0;
     String question="";
     String answer="";
+    String[] answerArray={"","","",""};
 }
-
+//TODO set answer to answerArray b = 1, d = 3 etc
 //TODO DATABASE READING AND SETTING
