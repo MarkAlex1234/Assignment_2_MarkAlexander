@@ -160,7 +160,7 @@ public class View extends JFrame implements Observer {
         } else if (!data.helpFlag) {
             this.helpFrame.dispose();
         } else {
-            this.setQuestion(data.question, data.answer, data.answerArray);
+           // this.setQuestion(data.question, data.answer, data.answerArray); -- CAUSING ERROR? INVESTIGATE
         }
     }
 }

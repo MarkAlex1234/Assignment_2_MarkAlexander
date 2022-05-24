@@ -71,9 +71,14 @@ public class Model extends Observable {
             if (answer.equals(data.answer)) {
                 data.currentScore += 10;
                 System.out.println("> CORRECT");
+                if (data.currentScore == 100) {
+                    System.out.println("> WINNER");
+                    //TODO ADD WINNER PANEL
+                }
             } else {
-                data.currentScore -= 10;
-                System.out.println("> INCORRECT");
+                data.currentScore = 0;
+                System.out.println("> INCORRECT - GAMEOVER");
+                quitGame();
             }
             this.newQuestion();
             this.setChanged();
@@ -82,7 +87,7 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
-    
+
     public void showHelp() {
         try {
             this.data.helpFlag = true;
@@ -92,7 +97,7 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
-    
+
     public void stopShowingHelp() {
         try {
             this.data.helpFlag = false;
