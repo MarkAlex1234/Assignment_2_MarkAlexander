@@ -92,5 +92,6 @@ public class View extends JFrame implements Observer {
         } else {
             this.setQuestion(data.question, data.answer);
         }
+        //git test
     }
 }
