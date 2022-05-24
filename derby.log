@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Tue May 24 14:45:12 NZST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-f3f4-413c-00000e4db668 
-on database directory C:\Users\WindForce\Documents\NetBeansProjects\Assignment_2-MarkAlexander\PlayerDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
-Loaded from file:/C:/Users/WindForce/Documents/NetBeansProjects/Assignment_2-MarkAlexander/lib/derby.jar
+Tue May 24 19:24:34 NZST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-f4f4-04bf-00000e4dbf10 
+on database directory C:\Users\WindForce\Documents\NetBeansProjects\Assignment_2_v2\PlayerDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
+Loaded from file:/C:/Users/WindForce/Documents/NetBeansProjects/Assignment_2_v2/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_333-b02
-user.dir=C:\Users\WindForce\Documents\NetBeansProjects\Assignment_2-MarkAlexander
+user.dir=C:\Users\WindForce\Documents\NetBeansProjects\Assignment_2_v2
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

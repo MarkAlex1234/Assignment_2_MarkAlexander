@@ -10,6 +10,7 @@ public class Data {
     boolean loginFlag =false;
     boolean quitFlag =false;
     boolean started = false;
+    boolean helpFlag = false;
     int currentScore =0;
     int num1 =0;
     int num2 =0;

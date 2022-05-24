@@ -46,10 +46,14 @@ public class Model extends Observable {
     }
 
     public void quitGame() {
-        this.db.quitGame(this.data.currentScore, this.username);
-        this.data.quitFlag = true;
-        this.setChanged();
-        this.notifyObservers(this.data);
+        try {
+            this.db.quitGame(this.data.currentScore, this.username);
+            this.data.quitFlag = true;
+            this.setChanged();
+            this.notifyObservers(this.data);
+        } catch (Exception e) {
+            System.out.println(">ERROR: " + e);
+        }
     }
 
     public void quitGameNOSaving() {
@@ -68,7 +72,27 @@ public class Model extends Observable {
             this.setChanged();
             this.notifyObservers(this.data);
         } catch (Exception e) {
-            System.out.println("ERROR: " + e);
+            System.out.println(">ERROR: " + e);
+        }
+    }
+    
+    public void showHelp() {
+        try {
+            this.data.helpFlag = true;
+            this.setChanged();
+            this.notifyObservers(this.data);
+        } catch (Exception e) {
+            System.out.println(">ERROR: " + e);
+        }
+    }
+    
+    public void stopShowingHelp() {
+        try {
+            this.data.helpFlag = false;
+            this.setChanged();
+            this.notifyObservers(this.data);
+        } catch (Exception e) {
+            System.out.println(">ERROR: " + e);
         }
     }
 }
