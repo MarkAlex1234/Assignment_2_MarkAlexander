@@ -26,6 +26,8 @@ public class View extends JFrame implements Observer {
     public JFrame gameFrame = new JFrame("Game - Play");
     public JFrame helpFrame = new JFrame("Game - Help");
 
+    private RandomManager rm = new RandomManager();
+
     public View() {
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 300);
@@ -55,8 +57,46 @@ public class View extends JFrame implements Observer {
 
     public void setQuestion(String q, String a) {
         gamePanel.questionTextField.setText(q);
-        gamePanel.answer1TextField.setText(a);
-        calcPanel.repaint();
+        switch (a) {
+            case "A":
+                //CORRECT ANSWER
+                gamePanel.answer1TextField.setText(a);
+                //INCORRECT ANSWERS
+                gamePanel.answer2TextField.setText("NO");
+                gamePanel.answer3TextField.setText("NO");
+                gamePanel.answer4TextField.setText("NO");
+                break;
+            case "B":
+                //CORRECT ANSWER
+                gamePanel.answer2TextField.setText(a);
+                //INCORRECT ANSWERS
+                gamePanel.answer1TextField.setText("NO");
+                gamePanel.answer3TextField.setText("NO");
+                gamePanel.answer4TextField.setText("NO");
+                break;
+            case "C":
+                //CORRECT ANSWER
+                gamePanel.answer3TextField.setText(a);
+                //INCORRECT ANSWERS
+                gamePanel.answer1TextField.setText("NO");
+                gamePanel.answer2TextField.setText("NO");
+                gamePanel.answer4TextField.setText("NO");
+                break;
+            case "D":
+                //CORRECT ANSWER
+                gamePanel.answer4TextField.setText(a);
+                //INCORRECT ANSWERS
+                gamePanel.answer1TextField.setText("NO");
+                gamePanel.answer2TextField.setText("NO");
+                gamePanel.answer3TextField.setText("NO");
+                break;
+            default:
+                gamePanel.answer1TextField.setText(a);
+                gamePanel.answer2TextField.setText("NO");
+                gamePanel.answer3TextField.setText("NO");
+                gamePanel.answer4TextField.setText("NO");
+        }
+        gamePanel.repaint();
     }
 
     public void addActionListener(ActionListener listener) {

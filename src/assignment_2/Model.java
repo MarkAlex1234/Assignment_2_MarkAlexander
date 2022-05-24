@@ -13,7 +13,7 @@ public class Model extends Observable {
 
     public Database db;
     public Data data;
-    private QuestionManger qm;
+    private RandomManager rm;
     public int ans = 0;
     public String username;
 
@@ -34,9 +34,12 @@ public class Model extends Observable {
     }
 
     public void newQuestion() {
-        qm = new QuestionManger();
-        this.data.question = qm.aQuestion;
-        this.data.answer = qm.answer;
+        rm = new RandomManager();
+        int randomNum = rm.generateNumber();
+        this.data.question = this.db.getQuestion(randomNum);
+        this.data.answer = this.db.getAnswer(randomNum);
+        this.setChanged();
+        this.notifyObservers(this.data);
     }
 
     public int getNumber() {

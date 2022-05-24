@@ -102,30 +102,47 @@ public class Database {
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return data;
 
     }
 
-    public Data getQuestion(int questionID) {
+    public String getQuestion(int questionID) {
         Data data = new Data();
 
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT questionID, question, answer FROM QNA "
-                    + "WHERE questionID = '" + questionID + "'");
+            ResultSet rs = statement.executeQuery("SELECT questionID, question FROM QNA "
+                    + "WHERE questionID = " + questionID + "");
             if (rs.next()) {
                 String question = rs.getString("question");
-                String answer = rs.getString("answer");
                 data.question = question;
-                data.answer = answer;
-                System.out.println("> FOUND question: " + question + " & answer: " + answer);
+                System.out.println("> FOUND question: " + question);
             }
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return data;
+        return data.question;
+    }
+
+    public String getAnswer(int questionID) {
+        Data data = new Data();
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT questionID, answer FROM QNA "
+                    + "WHERE questionID = " + questionID + "");
+            if (rs.next()) {
+                String answer = rs.getString("answer");
+                data.answer = answer;
+                System.out.println("> FOUND questionID: " + questionID + " & answer: " + answer);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data.answer;
     }
 
     void quitGame(int score, String username) {
@@ -138,7 +155,7 @@ public class Database {
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public void populateQuestionTable() {
@@ -168,4 +185,3 @@ public class Database {
         }
     }
 }
-
