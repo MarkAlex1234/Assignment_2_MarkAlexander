@@ -11,6 +11,7 @@ public class Data {
     boolean quitFlag =false;
     boolean started = false;
     boolean helpFlag = false;
+    boolean newQuestionFlag = false;
     int currentScore =0;
     int num1 =0;
     int num2 =0;

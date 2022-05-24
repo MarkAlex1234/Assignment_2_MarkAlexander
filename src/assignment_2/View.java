@@ -28,6 +28,8 @@ public class View extends JFrame implements Observer {
 
     private RandomManager rm = new RandomManager();
 
+    private boolean gameOver = false;
+
     public View() {
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 300);
@@ -40,7 +42,7 @@ public class View extends JFrame implements Observer {
     public void startQuiz() {
         gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(400, 350);
+        gameFrame.setSize(750, 500);
         gameFrame.add(gamePanel);
         gameFrame.setLocationRelativeTo(null);
         gameFrame.setVisible(true);
@@ -60,45 +62,47 @@ public class View extends JFrame implements Observer {
         switch (answer) {
             case "A":
                 //CORRECT ANSWER
-                gamePanel.answer1TextField.setText(answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
+                gamePanel.answer1TextField.setText("A)" + answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
                 //INCORRECT ANSWERS
-                gamePanel.answer2TextField.setText(answerArray[1]);
-                gamePanel.answer3TextField.setText(answerArray[2]);
-                gamePanel.answer4TextField.setText(answerArray[3]);
+                gamePanel.answer2TextField.setText("B)" + answerArray[1]);
+                gamePanel.answer3TextField.setText("C)" + answerArray[2]);
+                gamePanel.answer4TextField.setText("D)" + answerArray[3]);
                 break;
             case "B":
                 //CORRECT ANSWER
-                gamePanel.answer2TextField.setText(answerArray[0]);
+                gamePanel.answer2TextField.setText("B)" + answerArray[0]);
                 //INCORRECT ANSWERS
-                gamePanel.answer1TextField.setText(answerArray[1]);
-                gamePanel.answer3TextField.setText(answerArray[2]);
-                gamePanel.answer4TextField.setText(answerArray[3]);
+                gamePanel.answer1TextField.setText("A)" + answerArray[1]);
+                gamePanel.answer3TextField.setText("C)" + answerArray[2]);
+                gamePanel.answer4TextField.setText("D)" + answerArray[3]);
                 break;
             case "C":
                 //CORRECT ANSWER
-                gamePanel.answer3TextField.setText(answerArray[0]);
+                gamePanel.answer3TextField.setText("C)" + answerArray[0]);
                 //INCORRECT ANSWERS
-                gamePanel.answer1TextField.setText(answerArray[1]);
-                gamePanel.answer2TextField.setText(answerArray[2]);
-                gamePanel.answer4TextField.setText(answerArray[3]);
+                gamePanel.answer1TextField.setText("A)" + answerArray[1]);
+                gamePanel.answer2TextField.setText("B)" + answerArray[2]);
+                gamePanel.answer4TextField.setText("D)" + answerArray[3]);
                 break;
             case "D":
                 //CORRECT ANSWER
-                gamePanel.answer4TextField.setText(answerArray[0]);
+                gamePanel.answer4TextField.setText("D)" + answerArray[0]);
                 //INCORRECT ANSWERS
-                gamePanel.answer1TextField.setText(answerArray[1]);
-                gamePanel.answer2TextField.setText(answerArray[2]);
-                gamePanel.answer3TextField.setText(answerArray[3]);
+                gamePanel.answer1TextField.setText("A)" + answerArray[1]);
+                gamePanel.answer2TextField.setText("B)" + answerArray[2]);
+                gamePanel.answer3TextField.setText("C)" + answerArray[3]);
                 break;
             default:
                 //CORRECT ANSWER
-                gamePanel.answer1TextField.setText(answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
+                gamePanel.answer1TextField.setText("A)" + answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
                 //INCORRECT ANSWERS
-                gamePanel.answer2TextField.setText(answerArray[1]);
-                gamePanel.answer3TextField.setText(answerArray[2]);
-                gamePanel.answer4TextField.setText(answerArray[3]);
+                gamePanel.answer2TextField.setText("B)" + answerArray[1]);
+                gamePanel.answer3TextField.setText("C)" + answerArray[2]);
+                gamePanel.answer4TextField.setText("D)" + answerArray[3]);
         }
         gamePanel.repaint();
+        gameFrame.add(gamePanel);
+
     }
 
     public void addActionListener(ActionListener listener) {
@@ -151,10 +155,12 @@ public class View extends JFrame implements Observer {
             System.out.println("> EXITED SUCCESSFULLY");
         } else if (data.helpFlag) {
             showHelpView();
+        } else if (data.newQuestionFlag) {
+            this.setQuestion(data.question, data.answer, data.answerArray);
         } else if (!data.helpFlag) {
             this.helpFrame.dispose();
         } else {
-            this.setQuestion(data.question, data.answer, data.answerArray);
+           // this.setQuestion(data.question, data.answer, data.answerArray); -- CAUSING ERROR? INVESTIGATE
         }
     }
 }

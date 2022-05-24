@@ -166,7 +166,6 @@ public class Database {
                 data.answerArray[1] = wrongAnswer1;
                 data.answerArray[2] = wrongAnswer2;
                 data.answerArray[3] = wrongAnswer3;
-                System.out.println("> FOUND questionID: " + questionID + " & answer: " + answer);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -242,3 +241,10 @@ public class Database {
         }
     }
 }
+
+/*TODO LIST:
+STOP REOCCURING QUESTIONS
+ADD GAMEOVER SCREEN
+ADD WINNER SCREEN
+DONE.
+*/

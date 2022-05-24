@@ -39,6 +39,7 @@ public class Model extends Observable {
         this.data.question = this.db.getQuestion(randomNum);
         this.data.answer = this.db.getAnswer(randomNum);
         this.data.answerArray = this.db.getWrongAnswers(randomNum);
+        data.newQuestionFlag = true;
         this.setChanged();
         this.notifyObservers(this.data);
     }
@@ -67,10 +68,17 @@ public class Model extends Observable {
 
     public void checkAnswer(String answer) {
         try {
-            if (answer.equals(this.ans + "")) {
+            if (answer.equals(data.answer)) {
                 data.currentScore += 10;
+                System.out.println("> CORRECT");
+                if (data.currentScore == 100) {
+                    System.out.println("> WINNER");
+                    //TODO ADD WINNER PANEL
+                }
             } else {
-                data.currentScore -= 10;
+                data.currentScore = 0;
+                System.out.println("> INCORRECT - GAMEOVER");
+                quitGame();
             }
             this.newQuestion();
             this.setChanged();
@@ -79,7 +87,7 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
-    
+
     public void showHelp() {
         try {
             this.data.helpFlag = true;
@@ -89,7 +97,7 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
-    
+
     public void stopShowingHelp() {
         try {
             this.data.helpFlag = false;
