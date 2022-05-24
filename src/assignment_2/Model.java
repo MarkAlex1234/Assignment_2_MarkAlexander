@@ -36,7 +36,7 @@ public class Model extends Observable {
     public void newQuestion() {
         rm = new RandomManager();
         int randomNum = rm.generateNumber();
-        this.data.question = this.db.getQuestion(randomNum);
+        this.data.question = this.db.getQuestion(randomNum);;
         this.data.answer = this.db.getAnswer(randomNum);
         this.data.answerArray = this.db.getWrongAnswers(randomNum);
         data.newQuestionFlag = true;
@@ -106,5 +106,13 @@ public class Model extends Observable {
         } catch (Exception e) {
             System.out.println(">ERROR: " + e);
         }
+    }
+    
+    public void gameOverLoser(){
+        
+    }
+    
+    public void gameOverWinner(){
+        
     }
 }
