@@ -26,10 +26,14 @@ public class Database {
         try {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
-            String tableName = "UserInfo";
+            String userTable = "UserInfo";
+            String questionTable = "QnA";
 
-            if (!checkTableExisting(tableName)) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (userid VARCHAR(12), password VARCHAR(12), score INT)");
+            if (!checkTableExisting(userTable)) {
+                statement.executeUpdate("CREATE TABLE " + userTable + " (userid VARCHAR(12), password VARCHAR(12), score INT)");
+            }
+            if (!checkTableExisting(questionTable)) {
+                statement.executeUpdate("CREATE TABLE " + questionTable + " (questionID INT, question VARCHAR(50), answer INT)");
             }
             statement.close();
 
@@ -43,14 +47,14 @@ public class Database {
         boolean flag = false;
         try {
 
-            System.out.println("check existing tables.... ");
+            System.out.println("> Checking existing tables.... ");
             String[] types = {"TABLE"};
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);//types);
             while (rsDBMeta.next()) {
                 String tableName = rsDBMeta.getString("TABLE_NAME");
                 if (tableName.compareToIgnoreCase(newTableName) == 0) {
-                    System.out.println(tableName + "  is there");
+                    System.out.println("> " + tableName + " was found");
                     flag = true;
                 }
             }
@@ -74,8 +78,7 @@ public class Database {
                 System.out.println("> ERROR: USERNAME CANNOT BE EMPTY");
                 data.loginFlag = false;
                 return data;
-            }
-            else if (rs.next()) {
+            } else if (rs.next()) {
                 String pass = rs.getString("password");
                 System.out.println("> FOUND user with username: " + username + " & password: " + pass);
                 if (password.compareTo(pass) == 0) {
