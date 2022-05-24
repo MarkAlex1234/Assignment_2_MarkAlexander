@@ -38,6 +38,7 @@ public class Model extends Observable {
         int randomNum = rm.generateNumber();
         this.data.question = this.db.getQuestion(randomNum);
         this.data.answer = this.db.getAnswer(randomNum);
+        this.data.answerArray = this.db.getWrongAnswers(randomNum);
         this.setChanged();
         this.notifyObservers(this.data);
     }

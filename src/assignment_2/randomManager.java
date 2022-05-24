@@ -1,6 +1,6 @@
 /*
 
-Assignment 1 - Program Design & Construction 2022
+Assignment 2 - Program Design & Construction 2022
 
 Coded by Mark Alexander
 ID: 20112145

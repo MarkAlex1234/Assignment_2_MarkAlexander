@@ -27,7 +27,8 @@ public class Database {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
             String userTable = "UserInfo";
-            String questionTable = "QnA";
+            String questionTable = "QuestionTable";
+            String answerTable = "AnswerTable";
 
             if (!checkTableExisting(userTable)) {
                 statement.executeUpdate("CREATE TABLE " + userTable + " (userid VARCHAR(12), password VARCHAR(12), score INT)");
@@ -35,6 +36,10 @@ public class Database {
             if (!checkTableExisting(questionTable)) {
                 statement.executeUpdate("CREATE TABLE " + questionTable + " (questionID INT, question VARCHAR(200), answer VARCHAR(1))");
                 populateQuestionTable();
+            }
+            if (!checkTableExisting(answerTable)) {
+                statement.executeUpdate("CREATE TABLE " + answerTable + " (questionID INT, CorrectAnswer VARCHAR(100), WrongAnswer1 VARCHAR(100), WrongAnswer2 VARCHAR(100), WrongAnswer3 VARCHAR(100))");
+                populateAnswerTable();
             }
             statement.close();
 
@@ -112,7 +117,7 @@ public class Database {
 
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT questionID, question FROM QNA "
+            ResultSet rs = statement.executeQuery("SELECT questionID, question FROM QuestionTable "
                     + "WHERE questionID = " + questionID + "");
             if (rs.next()) {
                 String question = rs.getString("question");
@@ -131,7 +136,7 @@ public class Database {
 
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT questionID, answer FROM QNA "
+            ResultSet rs = statement.executeQuery("SELECT questionID, answer FROM QuestionTable "
                     + "WHERE questionID = " + questionID + "");
             if (rs.next()) {
                 String answer = rs.getString("answer");
@@ -143,6 +148,31 @@ public class Database {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data.answer;
+    }
+
+    public String[] getWrongAnswers(int questionID) {
+        Data data = new Data();
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM AnswerTable "
+                    + "WHERE questionID = " + questionID + "");
+            if (rs.next()) {
+                String answer = rs.getString("CorrectAnswer");
+                String wrongAnswer1 = rs.getString("WrongAnswer1");
+                String wrongAnswer2 = rs.getString("WrongAnswer2");
+                String wrongAnswer3 = rs.getString("WrongAnswer3");
+                data.answerArray[0] = answer;
+                data.answerArray[1] = wrongAnswer1;
+                data.answerArray[2] = wrongAnswer2;
+                data.answerArray[3] = wrongAnswer3;
+                System.out.println("> FOUND questionID: " + questionID + " & answer: " + answer);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data.answerArray;
     }
 
     void quitGame(int score, String username) {
@@ -161,7 +191,7 @@ public class Database {
     public void populateQuestionTable() {
         try {
             Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO QNA "
+            statement.executeUpdate("INSERT INTO QuestionTable "
                     + "VALUES(1, 'Captial of New Zealand is?', 'A'),"
                     + "(2, 'The hammer and sickle is one of the most recognisable symbols of which political ideology?', 'B'),"
                     + "(3, 'Obstetrics is a branch of medicine particularly concerned with what?', 'A'),"
@@ -178,6 +208,33 @@ public class Database {
                     + "(14, 'In the UK, the abbreviation NHS stands for National X Service?', 'B'),"
                     + "(15, 'Who is Spiderman?', 'C'),"
                     + "(16, 'What does the word loquacious mean?', 'B')");
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void populateAnswerTable() {
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate("INSERT INTO AnswerTable "
+                    + "VALUES(1, 'Wellington', 'Dunedin', 'Auckland', 'Chirstchurch'),"
+                    + "(2, 'Communism', 'Republicanism', 'Liberalism', 'Conservatism'),"
+                    + "(3, 'Childbirth', 'Old age', 'Broken bones', 'Heart conditions'),"
+                    + "(4, 'Big Ben Clock Tower', 'Eiffel Tower', 'Royal Albert Hall', 'Empire State Building'),"
+                    + "(5, 'A New Hope', 'Revenge Of The Sith', 'The Force Awakens', 'Return Of The Jedi'),"
+                    + "(6, 'Liverpool', 'Man-City', 'Chelsea', 'Everton'),"
+                    + "(7, 'Blackbeard', 'Captain Kidd', 'Captain Sparrow', 'Joe'),"
+                    + "(8, 'Transformers', 'Hot Wheels', 'Bratz Dolls', 'Hot Wheels'),"
+                    + "(9, 'Carousel', 'Concourse', 'Terminal', 'Hangar'),"
+                    + "(10, 'Cinderella', 'Elsa', 'Sleeping Beauty', 'Pocahontas'),"
+                    + "(11, 'Mark Alexander', 'John Doe', 'Micheal Jones', 'Fred'),"
+                    + "(12, '18', '21', '12', '16'),"
+                    + "(13, 'Luke Skywalker', 'Jake Skywalker', 'Anakin Skywalker', 'Leia Skywalker'),"
+                    + "(14, 'Health', 'Humanity', 'Honour', 'Household'),"
+                    + "(15, 'Peter Parker', 'Jack', 'Bruce Waynce', 'John Doe'),"
+                    + "(16, 'Chatty', 'Angry', 'Beautiful', 'Shy')");
             statement.close();
 
         } catch (SQLException ex) {
