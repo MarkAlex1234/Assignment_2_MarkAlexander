@@ -58,11 +58,6 @@ public class GamePanel extends javax.swing.JPanel {
         saveQuitButton.setText("Save & Quit");
 
         logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -129,10 +124,6 @@ public class GamePanel extends javax.swing.JPanel {
                     .addContainerGap(203, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_logoutButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
