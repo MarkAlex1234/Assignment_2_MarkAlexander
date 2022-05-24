@@ -39,6 +39,7 @@ public class Model extends Observable {
         this.data.question = this.db.getQuestion(randomNum);
         this.data.answer = this.db.getAnswer(randomNum);
         this.data.answerArray = this.db.getWrongAnswers(randomNum);
+        data.newQuestionFlag = true;
         this.setChanged();
         this.notifyObservers(this.data);
     }
@@ -67,10 +68,12 @@ public class Model extends Observable {
 
     public void checkAnswer(String answer) {
         try {
-            if (answer.equals(this.ans + "")) {
+            if (answer.equals(data.answer)) {
                 data.currentScore += 10;
+                System.out.println("> CORRECT");
             } else {
                 data.currentScore -= 10;
+                System.out.println("> INCORRECT");
             }
             this.newQuestion();
             this.setChanged();

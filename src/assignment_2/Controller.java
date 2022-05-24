@@ -47,16 +47,16 @@ public class Controller implements ActionListener {
                 this.model.stopShowingHelp();
                 break;
             case "A":
-                //this.model.quitGame();
+                this.model.checkAnswer("A");
                 break;
             case "B":
-               // this.model.quitGame();
+                this.model.checkAnswer("B");
                 break;
             case "C":
-               // this.model.quitGame();
+                this.model.checkAnswer("C");
                 break;
             case "D":
-               // this.model.quitGame();
+                this.model.checkAnswer("D");
                 break;
             default:
                 break;
