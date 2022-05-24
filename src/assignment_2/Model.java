@@ -75,4 +75,24 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
+    
+    public void showHelp() {
+        try {
+            this.data.helpFlag = true;
+            this.setChanged();
+            this.notifyObservers(this.data);
+        } catch (Exception e) {
+            System.out.println(">ERROR: " + e);
+        }
+    }
+    
+    public void stopShowingHelp() {
+        try {
+            this.data.helpFlag = false;
+            this.setChanged();
+            this.notifyObservers(this.data);
+        } catch (Exception e) {
+            System.out.println(">ERROR: " + e);
+        }
+    }
 }

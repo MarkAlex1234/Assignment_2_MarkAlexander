@@ -40,6 +40,12 @@ public class Controller implements ActionListener {
                 this.view.loginFrame.setVisible(true);
                 this.view.gameFrame.setVisible(false);
                 break;
+            case "Help":
+                this.model.showHelp();
+                break;
+            case "Close Help Menu":
+                this.model.stopShowingHelp();
+                break;
             case "A":
                 //this.model.quitGame();
                 break;
