@@ -5,7 +5,7 @@
  */
 package assignment_2;
 
-public class NewQuiz {
+public class Main {
     public static void main(String[] args) {
         View view = new View();
         Model model = new Model();
