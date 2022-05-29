@@ -19,10 +19,10 @@ import java.util.logging.Logger;
 
 public class Database {
 
-    Connection conn = null;
-    String url = "jdbc:derby:PlayerDB;create=true";  //url of the DB host
-    String dbusername = "pdc";  //your DB username
-    String dbpassword = "pdc";   //your DB password
+    private Connection conn = null;
+    private String url = "jdbc:derby:PlayerDB;create=true";  //url of the DB host
+    private String dbusername = "pdc";  //your DB username
+    private String dbpassword = "pdc";   //your DB password
 
     public void dbsetup() {
         try {
@@ -170,7 +170,7 @@ public class Database {
         return data.answer;
     }
 
-    public String[] getWrongAnswers(int questionID) {
+    public String[] getAnswersArray(int questionID) {
         Data data = new Data();
 
         try {

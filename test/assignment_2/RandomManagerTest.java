@@ -1,51 +1,86 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
  */
 package assignment_2;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author WindForce
- */
 public class RandomManagerTest {
+    
+    RandomManagerTest rmTest;
     
     public RandomManagerTest() {
     }
     
-    @BeforeAll
+    @BeforeClass
     public static void setUpClass() {
     }
     
-    @AfterAll
+    @AfterClass
     public static void tearDownClass() {
     }
     
-    @BeforeEach
+    @Before
     public void setUp() {
+        rmTest = new RandomManagerTest();
     }
     
-    @AfterEach
+    @After
     public void tearDown() {
     }
 
-    @Test
-    public void testGenerateNumber() {
-        System.out.println("generateNumber");
+    
+    @Test //Test if the generated number is less than 16
+    public void testGenerateNumberLessThan15() {
+        System.out.println(">TESTING: testGenerateNumberLessThan15");
         RandomManager instance = new RandomManager();
-        int expResult = 0;
         int result = instance.generateNumber();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(result < 16);
+    }
+    
+    @Test //Test if the generated number is over 15, it fails
+    public void testGenerateNumberGreaterThan15() {
+        System.out.println(">TESTING: testGenerateNumberGreaterThan15");
+        RandomManager instance = new RandomManager();
+        int result = instance.generateNumber();
+        if(result > 15){
+            fail(">TEST FAIL: The generated number is over 15");
+        }
+    }
+    
+    @Test //Test if the generated number is larger than 0
+    public void testGenerateNumberLargerThan0() {
+        System.out.println(">TESTING: testGenerateNumberLargerThan0");
+        RandomManager instance = new RandomManager();
+        int result = instance.generateNumber();
+        assertTrue(result > 0);
+    }
+    
+    @Test //Test if the generated number is not null
+    public void testGenerateNumberIsNotNull() {
+        System.out.println(">TESTING: testGenerateNumberIsNotNull");
+        RandomManager instance = new RandomManager();
+        int result = instance.generateNumber();
+        assertNotNull(result);
+    }
+    
+    @Test(expected = AssertionError.class) //Test if generated number does not return 0
+    public void testGenerateNumberIsNotZero() {
+        System.out.println(">TESTING: testGenerateNumberIsNotZero");
+        RandomManager instance = new RandomManager();
+        int expected = 0;
+        int result = instance.generateNumber();
+        assertEquals(result, expected);
     }
     
 }

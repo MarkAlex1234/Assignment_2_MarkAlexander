@@ -1,133 +1,107 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
  */
 package assignment_2;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author WindForce
- */
 public class ModelTest {
-    
+
+    Model modelTest;
+
     public ModelTest() {
     }
-    
-    @BeforeAll
+
+    @BeforeClass
     public static void setUpClass() {
     }
-    
-    @AfterAll
+
+    @AfterClass
     public static void tearDownClass() {
     }
-    
-    @BeforeEach
+
+    @Before
     public void setUp() {
+        modelTest = new Model();
     }
-    
-    @AfterEach
+
+    @After
     public void tearDown() {
     }
 
-    @Test
-    public void testCheckName() {
-        System.out.println("checkName");
-        String uname = "";
-        String pword = "";
-        Model instance = new Model();
-        instance.checkName(uname, pword);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
+    @Test(expected = NullPointerException.class) //Can not restart without first creating a database and logging in
     public void testRestart() {
-        System.out.println("restart");
-        Model instance = new Model();
-        instance.restart();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("TESTING: testRestart");
+        modelTest.restart();
     }
 
-    @Test
-    public void testNewQuestion() {
-        System.out.println("newQuestion");
-        Model instance = new Model();
-        instance.newQuestion();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test //Successfully connect to the database
+    public void testConnectingToDB() {
+        System.out.println("TESTING: testConnectingToDB");
+        modelTest = new Model();
     }
 
-    @Test
-    public void testQuitAndSave() {
-        System.out.println("quitAndSave");
-        Model instance = new Model();
-        instance.quitAndSave();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test //Check login details are correct in DB
+    public void testCheckNameAreCorrect() {
+        System.out.println("TESTING: testCheckNameAreCorrect");
+        String testName = "pdc";
+        String testPass = "adc";
+        modelTest.checkName(testName, testPass);
     }
 
-    @Test
-    public void testQuitGame() {
-        System.out.println("quitGame");
-        Model instance = new Model();
-        instance.quitGame();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test //Check if model can logout without logging in | Expected to catch exception
+    public void testLogoutWithoutLoggingIn() {
+        System.out.println("TESTING: testLogoutWithoutLoggingIn");
+        try {
+            modelTest.logout();
+        } catch (Exception e) {
+            fail("TEST FAILED: testLogoutWithoutLoggingIn -> Exception not caught: " + e);
+        }
     }
 
-    @Test
-    public void testQuitGameNOSaving() {
-        System.out.println("quitGameNOSaving");
-        Model instance = new Model();
-        instance.quitGameNOSaving();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testCheckAnswer() {
-        System.out.println("checkAnswer");
-        String answer = "";
-        Model instance = new Model();
-        instance.checkAnswer(answer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testShowHelp() {
-        System.out.println("showHelp");
-        Model instance = new Model();
-        instance.showHelp();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
+    @Test // Check if exception is caught when help is not showing | Expected to catch exception
     public void testStopShowingHelp() {
-        System.out.println("stopShowingHelp");
-        Model instance = new Model();
-        instance.stopShowingHelp();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("TESTING: testStopShowingHelp");
+        try {
+            modelTest.stopShowingHelp();
+        } catch (Exception e) {
+            fail("TEST FAILED: testStopShowingHelp -> Exception not caught: " + e);
+        }
     }
 
-    @Test
-    public void testLogout() {
-        System.out.println("logout");
-        Model instance = new Model();
-        instance.logout();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test // Check if exception is caught when help is not showing | Expected to catch exception
+    public void testStopShowingHelp2() {
+        System.out.println("TESTING: testStopShowingHelp2");
+        modelTest.showHelp(); // This still expected to fail as we have not logged in yet.
+        try {
+            modelTest.stopShowingHelp();
+        } catch (Exception e) {
+            fail("TEST FAILED: testStopShowingHelp2 -> Exception not caught: " + e);
+        }
     }
     
+    @Test // Check if successful after logging in
+    public void testStopShowingHelp3() {
+        System.out.println("TESTING: testStopShowingHelp3");
+        String uname = "pdc";
+        String pword = "adc";
+        modelTest.checkName(uname, pword);
+        modelTest.showHelp(); // This now passes as we have logged in.
+        try {
+            modelTest.stopShowingHelp();
+        } catch (Exception e) {
+            fail("TEST FAILED: testStopShowingHelp2 -> Exception not caught: " + e);
+        }
+    }
+
 }
