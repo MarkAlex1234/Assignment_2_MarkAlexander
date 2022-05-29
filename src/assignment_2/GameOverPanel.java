@@ -55,7 +55,7 @@ public class GameOverPanel extends javax.swing.JPanel {
 
         loserWinnerLabel.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         loserWinnerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loserWinnerLabel.setText("LOSER/WINNER");
+        loserWinnerLabel.setText("LOSER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,10 +102,10 @@ public class GameOverPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel finalScoreLabel;
     private javax.swing.JLabel gameOverLabel;
-    private javax.swing.JLabel loserWinnerLabel;
-    private javax.swing.JButton mainMenuButton;
-    private javax.swing.JButton playAgainButton;
-    private javax.swing.JButton quitButton;
+    public javax.swing.JLabel loserWinnerLabel;
+    public javax.swing.JButton mainMenuButton;
+    public javax.swing.JButton playAgainButton;
+    public javax.swing.JButton quitButton;
     public javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 }

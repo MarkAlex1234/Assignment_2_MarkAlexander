@@ -130,6 +130,22 @@ public class Database {
         }
         return data.question;
     }
+    
+     public int getQuestionId (int questionId) {
+         int qID = 0;
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT questionID, question FROM QuestionTable "
+                    + "WHERE questionID = " + questionId + "");
+            if (rs.next()) {
+                qID = rs.getInt("questionID");
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return qID;
+    }
 
     public String getAnswer(int questionID) {
         Data data = new Data();
@@ -241,10 +257,3 @@ public class Database {
         }
     }
 }
-
-/*TODO LIST:
-STOP REOCCURING QUESTIONS
-ADD GAMEOVER SCREEN
-ADD WINNER SCREEN
-DONE.
-*/

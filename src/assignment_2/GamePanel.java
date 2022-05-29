@@ -44,7 +44,7 @@ public class GamePanel extends javax.swing.JPanel {
         restartButton = new javax.swing.JButton();
         usernameLabel = new javax.swing.JLabel();
         totalLabel = new javax.swing.JLabel();
-        answeredLabel = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
 
         bButton.setText("B");
         bButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +108,9 @@ public class GamePanel extends javax.swing.JPanel {
         totalLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         totalLabel.setText("/ 10 CORRECT");
 
-        answeredLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        answeredLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        answeredLabel.setText("0");
+        scoreLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        scoreLabel.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -148,12 +148,9 @@ public class GamePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(129, 129, 129)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(157, 157, 157))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(aButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(92, 92, 92)))
+                                    .addComponent(bButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(aButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(157, 157, 157)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -161,7 +158,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(308, 308, 308)
-                .addComponent(answeredLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(totalLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -173,7 +170,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addComponent(questionPane, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(answeredLabel)
+                    .addComponent(scoreLabel)
                     .addComponent(totalLabel))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,7 +227,6 @@ public class GamePanel extends javax.swing.JPanel {
     public javax.swing.JTextField answer2TextField;
     public javax.swing.JTextField answer3TextField;
     public javax.swing.JTextField answer4TextField;
-    public javax.swing.JLabel answeredLabel;
     public javax.swing.JButton bButton;
     public javax.swing.JButton cButton;
     public javax.swing.JButton dButton;
@@ -240,6 +236,7 @@ public class GamePanel extends javax.swing.JPanel {
     public javax.swing.JTextArea questionTextField;
     public javax.swing.JButton restartButton;
     public javax.swing.JButton saveQuitButton;
+    public javax.swing.JLabel scoreLabel;
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel userLoggedInLabel;
     public javax.swing.JLabel usernameLabel;

@@ -10,11 +10,12 @@ import java.util.Observable;
 
 public class Model extends Observable {
 
-    public Database db;
-    public Data data;
+    private Database db;
+    private Data data;
     private RandomManager rm;
-    public int ans = 0;
-    public String username;
+    private int ans = 0;
+    private int oldQuestionId = 0;
+    private String username;
 
     public Model() {
         try {
@@ -38,18 +39,27 @@ public class Model extends Observable {
 
     public void restart() {
         this.data.currentScore = 0;
-        this.newQuestion();
+        this.data.started = false;
+        this.data.quitFlag = false;
         this.setChanged();
         this.notifyObservers(this.data);
+        this.newQuestion();
     }
 
     public void newQuestion() {
         rm = new RandomManager();
         int randomNum = rm.generateNumber();
-        this.data.question = this.db.getQuestion(randomNum);;
-        this.data.answer = this.db.getAnswer(randomNum);
-        this.data.answerArray = this.db.getWrongAnswers(randomNum);
+        
+        while (randomNum == oldQuestionId) { //Stops repeating questions
+            randomNum = rm.generateNumber();
+        }
+        
+        this.data.question = this.db.getQuestion(randomNum); //Sets the question
+        oldQuestionId = this.db.getQuestionId(randomNum); //Sets the ID of current question
+        this.data.answer = this.db.getAnswer(randomNum); // Searches the DB for the answer with questionID of randomNum
+        this.data.answerArray = this.db.getWrongAnswers(randomNum); // Sets the wrong answers with questionID of randomNum
         data.newQuestionFlag = true;
+        
         this.setChanged();
         this.notifyObservers(this.data);
     }
@@ -112,16 +122,10 @@ public class Model extends Observable {
         this.notifyObservers(this.data);
     }
 
-    public void logout(View view) {
-        view.loginFrame.setVisible(true);
-        view.gameFrame.setVisible(false);
-    }
-
-    public void gameOverLoser() {
-
-    }
-
-    public void gameOverWinner() {
-
+    public void logout() {
+        this.db.quitGame(this.data.currentScore, this.username);
+        this.data.logoutFlag = true;
+        this.setChanged();
+        this.notifyObservers(this.data);
     }
 }

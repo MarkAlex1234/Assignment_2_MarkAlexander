@@ -9,24 +9,18 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class View extends JFrame implements Observer {
 
-    public LoginPanel loginPanel = new LoginPanel();
+    public LoginPanel loginPanel = new LoginPanel(); 
     private GamePanel gamePanel = new GamePanel();
     private HelpMenuPanel helpMenuPanel = new HelpMenuPanel();
     private GameOverPanel gameOverPanel = new GameOverPanel();
 
-    public JFrame loginFrame = new JFrame("Game - Login");
-    public JFrame gameFrame = new JFrame("Game - Play");
-    public JFrame helpFrame = new JFrame("Game - Help");
-    public JFrame gameOverFrame = new JFrame("Game - GameOver");
-
-    private RandomManager rm = new RandomManager();
-
-    private boolean gameOver = false;
+    private JFrame loginFrame = new JFrame("Game - Login"); 
+    private JFrame gameFrame = new JFrame("Game - Play"); 
+    private JFrame helpFrame = new JFrame("Game - Help");
+    private JFrame gameOverFrame = new JFrame("Game - GameOver");
 
     public View() {
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,14 +49,17 @@ public class View extends JFrame implements Observer {
         helpFrame.setVisible(true);
     }
 
-    public void showGameOverView() {
+    public void showGameOverView(int score) {
         gameOverFrame.setResizable(false);
         gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameOverFrame.setSize(320, 300);
+        if (score == 10) {
+            this.gameOverPanel.loserWinnerLabel.setText("WINNER!");
+        }
+        this.gameOverPanel.scoreLabel.setText("" + score);
         gameOverFrame.add(gameOverPanel);
         gameOverFrame.setLocationRelativeTo(null);
         gameOverFrame.setVisible(true);
-
     }
 
     private void quitGame() {
@@ -114,7 +111,7 @@ public class View extends JFrame implements Observer {
                 gamePanel.answer3TextField.setText("C)" + answerArray[2]);
                 gamePanel.answer4TextField.setText("D)" + answerArray[3]);
         }
-        gamePanel.answeredLabel.setText(""+score);
+        gamePanel.scoreLabel.setText("" + score);
         gamePanel.repaint();
         gameFrame.add(gamePanel);
 
@@ -139,6 +136,9 @@ public class View extends JFrame implements Observer {
         this.gamePanel.logoutButton.addActionListener(listener);
 
         //Quit Buttons
+        this.gameOverPanel.mainMenuButton.addActionListener(listener);
+        this.gameOverPanel.playAgainButton.addActionListener(listener);
+        this.gameOverPanel.quitButton.addActionListener(listener);
     }
 
     @Override
@@ -150,6 +150,10 @@ public class View extends JFrame implements Observer {
             this.loginPanel.pwInput.setText("");
             this.loginPanel.messageLabel.setText("Invalid username and/or password");
 
+        } else if (data.logoutFlag) {
+            this.loginFrame.setVisible(true);
+            this.gameFrame.setVisible(false);
+            
         } else if (!data.started) {
             this.loginFrame.setVisible(false);
             data.started = true;
@@ -158,7 +162,7 @@ public class View extends JFrame implements Observer {
 
         } else if (data.quitFlag) {
             quitGame();
-            showGameOverView();
+            showGameOverView(data.currentScore);
 
         } else if (data.helpFlag) {
             showHelpView();
