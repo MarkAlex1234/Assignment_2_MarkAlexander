@@ -12,9 +12,9 @@ public class Data {
     boolean started = false;
     boolean helpFlag = false;
     boolean newQuestionFlag = false;
+    boolean logoutFlag = false;
+    boolean notGameOverFlag = false;
     int currentScore =0;
-    int num1 =0;
-    int num2 =0;
     String question="";
     String answer="";
     String[] answerArray={"","","",""};

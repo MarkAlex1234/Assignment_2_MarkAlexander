@@ -34,13 +34,13 @@ public class Controller implements ActionListener {
                 this.model.quitGameNOSaving();
                 break;
             case "Save & Quit":
-                this.model.quitGame();
+                this.model.quitAndSave();
                 break;
             case "Restart":
                 this.model.restart();
                 break;
             case "Logout":
-                this.model.logout(view);
+                this.model.logout();
                 break;
             case "Help":
                 this.model.showHelp();
@@ -59,6 +59,15 @@ public class Controller implements ActionListener {
                 break;
             case "D":
                 this.model.checkAnswer("D");
+                break;
+            case "Play again":
+                this.model.restart();
+                break;
+            case "Main Menu":
+                this.model.logout();
+                break;
+            case "Quit":
+                this.model.quitGameNOSaving();
                 break;
             default:
                 System.out.println(">CONTROLLER ERROR");

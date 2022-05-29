@@ -9,26 +9,24 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class View extends JFrame implements Observer {
 
-    public LoginPanel loginPanel = new LoginPanel();
+    public LoginPanel loginPanel = new LoginPanel(); //Must be public to check login details
     private GamePanel gamePanel = new GamePanel();
     private HelpMenuPanel helpMenuPanel = new HelpMenuPanel();
     private GameOverPanel gameOverPanel = new GameOverPanel();
 
-    public JFrame loginFrame = new JFrame("Game - Login");
-    public JFrame gameFrame = new JFrame("Game - Play");
-    public JFrame helpFrame = new JFrame("Game - Help");
-    public JFrame gameOverFrame = new JFrame("Game - GameOver");
-
-    private RandomManager rm = new RandomManager();
-
-    private boolean gameOver = false;
+    private JFrame loginFrame = new JFrame("Game - Login");
+    private JFrame gameFrame = new JFrame("Game - Play");
+    private JFrame helpFrame = new JFrame("Game - Help");
+    private JFrame gameOverFrame = new JFrame("Game - GameOver");
 
     public View() {
+        showLoginView();
+    }
+
+    private void showLoginView() {
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 300);
         loginFrame.setResizable(false);
@@ -37,7 +35,7 @@ public class View extends JFrame implements Observer {
         loginFrame.setVisible(true);
     }
 
-    public void startQuiz() {
+    private void showGameView() {
         gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setSize(780, 500);
@@ -46,7 +44,7 @@ public class View extends JFrame implements Observer {
         gameFrame.setVisible(true);
     }
 
-    public void showHelpView() {
+    private void showHelpView() {
         helpFrame.setResizable(false);
         helpFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         helpFrame.setSize(350, 260);
@@ -55,15 +53,17 @@ public class View extends JFrame implements Observer {
         helpFrame.setVisible(true);
     }
 
-    public void showGameOverView() {
-        this.gameFrame.setVisible(false);
+    private void showGameOverView(int score) {
         gameOverFrame.setResizable(false);
         gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameOverFrame.setSize(320, 300);
+        if (score == 10) {
+            this.gameOverPanel.loserWinnerLabel.setText("WINNER!");
+        }
+        this.gameOverPanel.scoreLabel.setText("" + score);
         gameOverFrame.add(gameOverPanel);
         gameOverFrame.setLocationRelativeTo(null);
         gameOverFrame.setVisible(true);
-
     }
 
     private void quitGame() {
@@ -72,7 +72,7 @@ public class View extends JFrame implements Observer {
         this.helpFrame.dispose();
     }
 
-    public void setQuestion(String question, String answer, String[] answerArray) {
+    private void setGamePanel(String question, String answer, String[] answerArray, int score) {
         gamePanel.questionTextField.setText(question);
         switch (answer) {
             case "A":
@@ -115,6 +115,7 @@ public class View extends JFrame implements Observer {
                 gamePanel.answer3TextField.setText("C)" + answerArray[2]);
                 gamePanel.answer4TextField.setText("D)" + answerArray[3]);
         }
+        gamePanel.scoreLabel.setText("" + score);
         gamePanel.repaint();
         gameFrame.add(gamePanel);
 
@@ -139,6 +140,9 @@ public class View extends JFrame implements Observer {
         this.gamePanel.logoutButton.addActionListener(listener);
 
         //Quit Buttons
+        this.gameOverPanel.mainMenuButton.addActionListener(listener);
+        this.gameOverPanel.playAgainButton.addActionListener(listener);
+        this.gameOverPanel.quitButton.addActionListener(listener);
     }
 
     @Override
@@ -150,14 +154,22 @@ public class View extends JFrame implements Observer {
             this.loginPanel.pwInput.setText("");
             this.loginPanel.messageLabel.setText("Invalid username and/or password");
 
+        } else if (data.logoutFlag) {
+            this.loginFrame.setVisible(true);
+            this.gameFrame.setVisible(false);
+
         } else if (!data.started) {
             this.loginFrame.setVisible(false);
             data.started = true;
-            this.setQuestion(data.question, data.answer, data.answerArray);
-            this.startQuiz();
+            this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
+            this.showGameView();
 
         } else if (data.quitFlag) {
             quitGame();
+            if (data.notGameOverFlag) { //Used to check if user selected save and quit - not to show the gameover screen.
+            } else {
+                showGameOverView(data.currentScore);
+            }
 
         } else if (data.helpFlag) {
             showHelpView();
@@ -165,6 +177,6 @@ public class View extends JFrame implements Observer {
             this.helpFrame.dispose();
         }
 
-        this.setQuestion(data.question, data.answer, data.answerArray);
+        this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
     }
 }
