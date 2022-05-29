@@ -36,6 +36,9 @@ public class Controller implements ActionListener {
             case "Save & Quit":
                 this.model.quitGame();
                 break;
+            case "Restart":
+                this.model.restart();
+                break;
             case "Logout":
                 this.model.logout(view);
                 break;

@@ -32,6 +32,13 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers(this.data);
     }
+    
+    public void restart(){
+        this.data.currentScore = 0;
+        this.newQuestion();
+        this.setChanged();
+        this.notifyObservers(this.data);
+    }
 
     public void newQuestion() {
         rm = new RandomManager();

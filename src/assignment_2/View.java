@@ -134,6 +134,7 @@ public class View extends JFrame implements Observer {
         this.gamePanel.cButton.addActionListener(listener);
         this.gamePanel.dButton.addActionListener(listener);
         this.gamePanel.helpButton.addActionListener(listener);
+        this.gamePanel.restartButton.addActionListener(listener);
         this.gamePanel.saveQuitButton.addActionListener(listener);
         this.gamePanel.logoutButton.addActionListener(listener);
 
