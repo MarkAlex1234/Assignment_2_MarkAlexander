@@ -166,7 +166,10 @@ public class View extends JFrame implements Observer {
 
         } else if (data.quitFlag) {
             quitGame();
-            showGameOverView(data.currentScore);
+            if (data.notGameOverFlag) { //Used to check if user selected save and quit - not to show the gameover screen.
+            } else {
+                showGameOverView(data.currentScore);
+            }
 
         } else if (data.helpFlag) {
             showHelpView();

@@ -13,6 +13,7 @@ public class Data {
     boolean helpFlag = false;
     boolean newQuestionFlag = false;
     boolean logoutFlag = false;
+    boolean notGameOverFlag = false;
     int currentScore =0;
     String question="";
     String answer="";
