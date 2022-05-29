@@ -12,17 +12,21 @@ import javax.swing.JFrame;
 
 public class View extends JFrame implements Observer {
 
-    public LoginPanel loginPanel = new LoginPanel(); 
+    public LoginPanel loginPanel = new LoginPanel(); //Must be public to check login details
     private GamePanel gamePanel = new GamePanel();
     private HelpMenuPanel helpMenuPanel = new HelpMenuPanel();
     private GameOverPanel gameOverPanel = new GameOverPanel();
 
-    private JFrame loginFrame = new JFrame("Game - Login"); 
-    private JFrame gameFrame = new JFrame("Game - Play"); 
+    private JFrame loginFrame = new JFrame("Game - Login");
+    private JFrame gameFrame = new JFrame("Game - Play");
     private JFrame helpFrame = new JFrame("Game - Help");
     private JFrame gameOverFrame = new JFrame("Game - GameOver");
 
     public View() {
+        showLoginView();
+    }
+
+    private void showLoginView() {
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 300);
         loginFrame.setResizable(false);
@@ -31,7 +35,7 @@ public class View extends JFrame implements Observer {
         loginFrame.setVisible(true);
     }
 
-    public void startQuiz() {
+    private void showGameView() {
         gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setSize(780, 500);
@@ -40,7 +44,7 @@ public class View extends JFrame implements Observer {
         gameFrame.setVisible(true);
     }
 
-    public void showHelpView() {
+    private void showHelpView() {
         helpFrame.setResizable(false);
         helpFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         helpFrame.setSize(350, 260);
@@ -49,7 +53,7 @@ public class View extends JFrame implements Observer {
         helpFrame.setVisible(true);
     }
 
-    public void showGameOverView(int score) {
+    private void showGameOverView(int score) {
         gameOverFrame.setResizable(false);
         gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameOverFrame.setSize(320, 300);
@@ -68,7 +72,7 @@ public class View extends JFrame implements Observer {
         this.helpFrame.dispose();
     }
 
-    public void setGamePanel(String question, String answer, String[] answerArray, int score) {
+    private void setGamePanel(String question, String answer, String[] answerArray, int score) {
         gamePanel.questionTextField.setText(question);
         switch (answer) {
             case "A":
@@ -153,12 +157,12 @@ public class View extends JFrame implements Observer {
         } else if (data.logoutFlag) {
             this.loginFrame.setVisible(true);
             this.gameFrame.setVisible(false);
-            
+
         } else if (!data.started) {
             this.loginFrame.setVisible(false);
             data.started = true;
             this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
-            this.startQuiz();
+            this.showGameView();
 
         } else if (data.quitFlag) {
             quitGame();
