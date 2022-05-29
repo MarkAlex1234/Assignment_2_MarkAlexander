@@ -27,19 +27,85 @@ public class GameOverPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        gameOverLabel = new javax.swing.JLabel();
+        finalScoreLabel = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
+        quitButton = new javax.swing.JButton();
+        playAgainButton = new javax.swing.JButton();
+        mainMenuButton = new javax.swing.JButton();
+        loserWinnerLabel = new javax.swing.JLabel();
+
+        gameOverLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        gameOverLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        gameOverLabel.setText("GAME OVER");
+
+        finalScoreLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        finalScoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        finalScoreLabel.setText("FINAL SCORE:");
+
+        scoreLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreLabel.setText("SCORE");
+
+        quitButton.setText("Quit");
+
+        playAgainButton.setText("Play again");
+
+        mainMenuButton.setText("Main Menu");
+
+        loserWinnerLabel.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
+        loserWinnerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loserWinnerLabel.setText("LOSER/WINNER");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(gameOverLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(loserWinnerLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(finalScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scoreLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(playAgainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainMenuButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(quitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(gameOverLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loserWinnerLabel)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finalScoreLabel)
+                    .addComponent(scoreLabel))
+                .addGap(35, 35, 35)
+                .addComponent(playAgainButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainMenuButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(quitButton)
+                .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel finalScoreLabel;
+    private javax.swing.JLabel gameOverLabel;
+    private javax.swing.JLabel loserWinnerLabel;
+    private javax.swing.JButton mainMenuButton;
+    private javax.swing.JButton playAgainButton;
+    private javax.swing.JButton quitButton;
+    public javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 }

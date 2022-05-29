@@ -36,9 +36,11 @@ public class Controller implements ActionListener {
             case "Save & Quit":
                 this.model.quitGame();
                 break;
+            case "Restart":
+                this.model.restart();
+                break;
             case "Logout":
-                this.view.loginFrame.setVisible(true);
-                this.view.gameFrame.setVisible(false);
+                this.model.logout(view);
                 break;
             case "Help":
                 this.model.showHelp();
@@ -59,6 +61,7 @@ public class Controller implements ActionListener {
                 this.model.checkAnswer("D");
                 break;
             default:
+                System.out.println(">CONTROLLER ERROR");
                 break;
         }
     }
