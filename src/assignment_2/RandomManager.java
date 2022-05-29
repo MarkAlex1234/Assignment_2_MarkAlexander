@@ -24,13 +24,4 @@ public final class RandomManager {
         }
         return i;
     }
-    
-    public int generateNumberMAX4() {
-        Random generator = new Random();
-        int i = generator.nextInt(5);
-        while (i == 0){
-            i = generator.nextInt(5);
-        }
-        return i;
-    }
 }
