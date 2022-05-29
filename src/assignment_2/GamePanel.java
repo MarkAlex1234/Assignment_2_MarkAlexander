@@ -40,9 +40,11 @@ public class GamePanel extends javax.swing.JPanel {
         saveQuitButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        userLoggedInLabel = new javax.swing.JLabel();
         restartButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        answeredLabel = new javax.swing.JLabel();
 
         bButton.setText("B");
         bButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +66,17 @@ public class GamePanel extends javax.swing.JPanel {
         questionTextField.setEnabled(false);
         questionPane.setViewportView(questionTextField);
 
+        answer3TextField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        answer3TextField.setEnabled(false);
+
+        answer1TextField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        answer1TextField.setEnabled(false);
+
+        answer2TextField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        answer2TextField.setEnabled(false);
+
+        answer4TextField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        answer4TextField.setEnabled(false);
         answer4TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 answer4TextFieldActionPerformed(evt);
@@ -86,11 +99,18 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("User logged in:");
+        userLoggedInLabel.setText("User logged in:");
 
         restartButton.setText("Restart");
 
-        jLabel2.setText("username");
+        usernameLabel.setText("username");
+
+        totalLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        totalLabel.setText("/ 10 CORRECT");
+
+        answeredLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        answeredLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        answeredLabel.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,9 +122,9 @@ public class GamePanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
+                        .addComponent(userLoggedInLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
+                        .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -128,21 +148,34 @@ public class GamePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(129, 129, 129)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(aButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(157, 157, 157)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(bButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(157, 157, 157))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(aButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(92, 92, 92)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 83, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(308, 308, 308)
+                .addComponent(answeredLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(totalLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(questionPane, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(questionPane, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(answeredLabel)
+                    .addComponent(totalLabel))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(answer1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(answer3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,8 +189,8 @@ public class GamePanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(saveQuitButton)
                             .addComponent(logoutButton)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
+                            .addComponent(userLoggedInLabel)
+                            .addComponent(usernameLabel)
                             .addComponent(restartButton)
                             .addComponent(helpButton))
                         .addGap(14, 14, 14))
@@ -166,11 +199,11 @@ public class GamePanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(aButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(68, Short.MAX_VALUE))))
+                        .addContainerGap(57, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,16 +230,18 @@ public class GamePanel extends javax.swing.JPanel {
     public javax.swing.JTextField answer2TextField;
     public javax.swing.JTextField answer3TextField;
     public javax.swing.JTextField answer4TextField;
+    public javax.swing.JLabel answeredLabel;
     public javax.swing.JButton bButton;
     public javax.swing.JButton cButton;
     public javax.swing.JButton dButton;
     public javax.swing.JButton helpButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     public javax.swing.JButton logoutButton;
     private javax.swing.JScrollPane questionPane;
     public javax.swing.JTextArea questionTextField;
     public javax.swing.JButton restartButton;
     public javax.swing.JButton saveQuitButton;
+    private javax.swing.JLabel totalLabel;
+    private javax.swing.JLabel userLoggedInLabel;
+    public javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
