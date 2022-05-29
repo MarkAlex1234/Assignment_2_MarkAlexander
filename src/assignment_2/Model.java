@@ -59,7 +59,7 @@ public class Model extends Observable {
             this.data.question = this.db.getQuestion(randomNum); //Sets the question
             oldQuestionId = this.db.getQuestionId(randomNum); //Sets the ID of current question
             this.data.answer = this.db.getAnswer(randomNum); // Searches the DB for the answer with questionID of randomNum
-            this.data.answerArray = this.db.getWrongAnswers(randomNum); // Sets the wrong answers with questionID of randomNum
+            this.data.answerArray = this.db.getAnswersArray(randomNum); // Sets the wrong answers with questionID of randomNum
             data.newQuestionFlag = true;
 
             this.setChanged();

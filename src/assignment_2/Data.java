@@ -9,16 +9,16 @@ ID: 20112145
 package assignment_2;
 
 public class Data {
-    boolean loginFlag =false;
-    boolean quitFlag =false;
-    boolean started = false;
-    boolean helpFlag = false;
-    boolean newQuestionFlag = false;
-    boolean logoutFlag = false;
-    boolean notGameOverFlag = false;
-    int currentScore =0;
-    String username="";
-    String question="";
-    String answer="";
-    String[] answerArray={"","","",""};
+    public boolean loginFlag = false;
+    public boolean quitFlag = false;
+    public boolean started = false;
+    public boolean helpFlag = false;
+    public boolean newQuestionFlag = false;
+    public boolean logoutFlag = false;
+    public boolean notGameOverFlag = false;
+    public int currentScore = 0;
+    public String username = "";
+    public String question = "";
+    public String answer = "";
+    public String[] answerArray = {"", "", "", ""};
 }
