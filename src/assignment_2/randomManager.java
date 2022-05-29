@@ -19,6 +19,9 @@ public final class RandomManager {
     public int generateNumber() {
         Random generator = new Random();
         int i = generator.nextInt(15);
+        while(i == 0){
+            i = generator.nextInt(15);
+        }
         return i;
     }
     

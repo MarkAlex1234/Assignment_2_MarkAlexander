@@ -7,7 +7,6 @@
 package assignment_2;
 
 import java.util.Observable;
-import java.util.Random;
 
 public class Model extends Observable {
 
@@ -18,8 +17,12 @@ public class Model extends Observable {
     public String username;
 
     public Model() {
-        this.db = new Database();
-        this.db.dbsetup();
+        try {
+            this.db = new Database();
+            this.db.dbsetup();
+        } catch (Exception e) {
+            System.out.println(">ERROR SETTING UP DATABASE IN THE MODEL CLASS: " + e);
+        }
     }
 
     public void checkName(String uname, String pword) {
@@ -32,8 +35,8 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers(this.data);
     }
-    
-    public void restart(){
+
+    public void restart() {
         this.data.currentScore = 0;
         this.newQuestion();
         this.setChanged();
@@ -49,12 +52,6 @@ public class Model extends Observable {
         data.newQuestionFlag = true;
         this.setChanged();
         this.notifyObservers(this.data);
-    }
-
-    public int getNumber() {
-        Random generator = new Random();
-        int i = generator.nextInt(100);
-        return i;
     }
 
     public void quitGame() {
@@ -75,21 +72,25 @@ public class Model extends Observable {
 
     public void checkAnswer(String answer) {
         try {
-            if (answer.equals(data.answer)) {
-                data.currentScore += 10;
+            if (this.data.currentScore >= 10) {
+                System.out.println("> WINNER");
+                this.data.quitFlag = true;
+                this.setChanged();
+                this.notifyObservers(this.data);
+            } else if (answer.equals(data.answer)) {
+                this.data.currentScore += 1;
                 System.out.println("> CORRECT");
-                if (data.currentScore == 100) {
-                    System.out.println("> WINNER");
-                    //TODO ADD WINNER PANEL
-                }
+                this.setChanged();
+                this.notifyObservers(this.data);
+                this.newQuestion();
             } else {
                 data.currentScore = 0;
                 System.out.println("> INCORRECT - GAMEOVER");
+                this.setChanged();
+                this.notifyObservers(this.data);
                 quitGame();
             }
-            this.newQuestion();
-            this.setChanged();
-            this.notifyObservers(this.data);
+
         } catch (Exception e) {
             System.out.println(">ERROR: " + e);
         }
@@ -104,23 +105,23 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
-    
-    public void stopShowingHelp(){
+
+    public void stopShowingHelp() {
         this.data.helpFlag = false;
         this.setChanged();
         this.notifyObservers(this.data);
     }
-    
-    public void logout(View view){
+
+    public void logout(View view) {
         view.loginFrame.setVisible(true);
         view.gameFrame.setVisible(false);
     }
- 
-    public void gameOverLoser(){
-        
+
+    public void gameOverLoser() {
+
     }
-    
-    public void gameOverWinner(){
-        
+
+    public void gameOverWinner() {
+
     }
 }

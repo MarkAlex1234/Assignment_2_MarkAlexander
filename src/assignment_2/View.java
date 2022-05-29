@@ -56,7 +56,6 @@ public class View extends JFrame implements Observer {
     }
 
     public void showGameOverView() {
-        this.gameFrame.setVisible(false);
         gameOverFrame.setResizable(false);
         gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameOverFrame.setSize(320, 300);
@@ -72,7 +71,7 @@ public class View extends JFrame implements Observer {
         this.helpFrame.dispose();
     }
 
-    public void setQuestion(String question, String answer, String[] answerArray) {
+    public void setGamePanel(String question, String answer, String[] answerArray, int score) {
         gamePanel.questionTextField.setText(question);
         switch (answer) {
             case "A":
@@ -115,6 +114,7 @@ public class View extends JFrame implements Observer {
                 gamePanel.answer3TextField.setText("C)" + answerArray[2]);
                 gamePanel.answer4TextField.setText("D)" + answerArray[3]);
         }
+        gamePanel.answeredLabel.setText(""+score);
         gamePanel.repaint();
         gameFrame.add(gamePanel);
 
@@ -153,11 +153,12 @@ public class View extends JFrame implements Observer {
         } else if (!data.started) {
             this.loginFrame.setVisible(false);
             data.started = true;
-            this.setQuestion(data.question, data.answer, data.answerArray);
+            this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
             this.startQuiz();
 
         } else if (data.quitFlag) {
             quitGame();
+            showGameOverView();
 
         } else if (data.helpFlag) {
             showHelpView();
@@ -165,6 +166,6 @@ public class View extends JFrame implements Observer {
             this.helpFrame.dispose();
         }
 
-        this.setQuestion(data.question, data.answer, data.answerArray);
+        this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
     }
 }
