@@ -1,18 +1,20 @@
+/*
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
+ */
 package assignment_2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author Mark Alexander
- * @StudentID: 20112145
- *
- */
 public class Controller implements ActionListener {
 
-    public View view;
-    public Model model;
+    private View view;
+    private Model model;
 
     public Controller(View view, Model model) {
         this.view = view;
@@ -25,6 +27,8 @@ public class Controller implements ActionListener {
         String command = e.getActionCommand();
         System.out.println("> BUTTONCLICKED: " + command);
         switch (command) {
+
+            // Login View Buttons
             case "Login":
                 String username = this.view.loginPanel.unInput.getText();
                 String password = this.view.loginPanel.pwInput.getText();
@@ -33,6 +37,8 @@ public class Controller implements ActionListener {
             case "EXIT":
                 this.model.quitGameNOSaving();
                 break;
+
+            // Game View Buttons
             case "Save & Quit":
                 this.model.quitAndSave();
                 break;
@@ -44,9 +50,6 @@ public class Controller implements ActionListener {
                 break;
             case "Help":
                 this.model.showHelp();
-                break;
-            case "Close Help Menu":
-                this.model.stopShowingHelp();
                 break;
             case "A":
                 this.model.checkAnswer("A");
@@ -60,6 +63,13 @@ public class Controller implements ActionListener {
             case "D":
                 this.model.checkAnswer("D");
                 break;
+
+            // Help View Buttons
+            case "Close Help Menu":
+                this.model.stopShowingHelp();
+                break;
+
+            // Game Over View Buttons
             case "Play again":
                 this.model.restart();
                 break;
@@ -69,6 +79,8 @@ public class Controller implements ActionListener {
             case "Quit":
                 this.model.quitGameNOSaving();
                 break;
+
+            //Default
             default:
                 System.out.println(">CONTROLLER ERROR");
                 break;

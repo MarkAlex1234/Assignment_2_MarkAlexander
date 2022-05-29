@@ -1,7 +1,10 @@
-/**
- *
- * @author Mark Alexander
- * ID: 20112145
+/*
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
  */
 package assignment_2;
 
@@ -72,12 +75,12 @@ public class View extends JFrame implements Observer {
         this.helpFrame.dispose();
     }
 
-    private void setGamePanel(String question, String answer, String[] answerArray, int score) {
+    private void setGamePanel(String question, String answer, String[] answerArray, int score, String username) {
         gamePanel.questionTextField.setText(question);
         switch (answer) {
             case "A":
                 //CORRECT ANSWER
-                gamePanel.answer1TextField.setText("A)" + answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
+                gamePanel.answer1TextField.setText("A)" + answerArray[0]);
                 //INCORRECT ANSWERS
                 gamePanel.answer2TextField.setText("B)" + answerArray[1]);
                 gamePanel.answer3TextField.setText("C)" + answerArray[2]);
@@ -109,13 +112,14 @@ public class View extends JFrame implements Observer {
                 break;
             default:
                 //CORRECT ANSWER
-                gamePanel.answer1TextField.setText("A)" + answerArray[0]); //TODO CHANGE TO ANSWER ARRAY - SEE DATA TO UNDERSTAND
+                gamePanel.answer1TextField.setText("A)" + answerArray[0]);
                 //INCORRECT ANSWERS
                 gamePanel.answer2TextField.setText("B)" + answerArray[1]);
                 gamePanel.answer3TextField.setText("C)" + answerArray[2]);
                 gamePanel.answer4TextField.setText("D)" + answerArray[3]);
         }
         gamePanel.scoreLabel.setText("" + score);
+        gamePanel.usernameLabel.setText(username);
         gamePanel.repaint();
         gameFrame.add(gamePanel);
 
@@ -158,10 +162,10 @@ public class View extends JFrame implements Observer {
             this.loginFrame.setVisible(true);
             this.gameFrame.setVisible(false);
 
-        } else if (!data.started) {
+        } else if (!data.started) { // Check if user has started : Start if not.
             this.loginFrame.setVisible(false);
             data.started = true;
-            this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
+            this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore, data.username);
             this.showGameView();
 
         } else if (data.quitFlag) {
@@ -177,6 +181,6 @@ public class View extends JFrame implements Observer {
             this.helpFrame.dispose();
         }
 
-        this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
+        this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore, data.username);
     }
 }

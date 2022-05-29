@@ -1,8 +1,10 @@
-/**
- *
- * @author Mark Alexander
- * @StudentID: 20112145
- *
+/*
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
  */
 package assignment_2;
 
@@ -31,7 +33,7 @@ public class Database {
             String answerTable = "AnswerTable";
 
             if (!checkTableExisting(userTable)) {
-                statement.executeUpdate("CREATE TABLE " + userTable + " (userid VARCHAR(12), password VARCHAR(12), score INT)");
+                statement.executeUpdate("CREATE TABLE " + userTable + " (userid VARCHAR(200), password VARCHAR(200), score INT)");
             }
             if (!checkTableExisting(questionTable)) {
                 statement.executeUpdate("CREATE TABLE " + questionTable + " (questionID INT, question VARCHAR(200), answer VARCHAR(1))");
@@ -92,6 +94,7 @@ public class Database {
                     data.currentScore = rs.getInt("score");
                     data.loginFlag = true;
                     data.started = false;
+                    data.username = username;
                 } else {
                     System.out.println("> ERROR: Incorrect password for user '" + username + "'");
                     data.loginFlag = false;
@@ -102,6 +105,7 @@ public class Database {
                         + "VALUES('" + username + "', '" + password + "', 0)");
                 data.currentScore = 0;
                 data.loginFlag = true;
+                data.username = username;
             }
             rs.close();
         } catch (SQLException ex) {

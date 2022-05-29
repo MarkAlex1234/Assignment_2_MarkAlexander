@@ -1,8 +1,10 @@
-/**
- *
- * @author Mark Alexander
- * @StudentID: 20112145
- *
+/*
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
  */
 package assignment_2;
 
@@ -13,7 +15,6 @@ public class Model extends Observable {
     private Database db;
     private Data data;
     private RandomManager rm;
-    private int ans = 0;
     private int oldQuestionId = 0;
     private String username;
 

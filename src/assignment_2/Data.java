@@ -1,8 +1,10 @@
-/**
- *
- * @author Mark Alexander
- * @StudentID: 20112145
- * 
+/*
+
+Assignment 2 - Program Design & Construction 2022
+
+Coded by Mark Alexander
+ID: 20112145
+
  */
 package assignment_2;
 
@@ -15,9 +17,8 @@ public class Data {
     boolean logoutFlag = false;
     boolean notGameOverFlag = false;
     int currentScore =0;
+    String username="";
     String question="";
     String answer="";
     String[] answerArray={"","","",""};
 }
-//TODO set answer to answerArray b = 1, d = 3 etc
-//TODO DATABASE READING AND SETTING
