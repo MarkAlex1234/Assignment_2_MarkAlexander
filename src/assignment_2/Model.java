@@ -97,17 +97,18 @@ public class Model extends Observable {
             System.out.println(">ERROR: " + e);
         }
     }
-
-    public void stopShowingHelp() {
-        try {
-            this.data.helpFlag = false;
-            this.setChanged();
-            this.notifyObservers(this.data);
-        } catch (Exception e) {
-            System.out.println(">ERROR: " + e);
-        }
+    
+    public void stopShowingHelp(){
+        this.data.helpFlag = false;
+        this.setChanged();
+        this.notifyObservers(this.data);
     }
     
+    public void logout(View view){
+        view.loginFrame.setVisible(true);
+        view.gameFrame.setVisible(false);
+    }
+ 
     public void gameOverLoser(){
         
     }
