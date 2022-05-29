@@ -13,7 +13,6 @@ public class Model extends Observable {
     private Database db;
     private Data data;
     private RandomManager rm;
-    private int ans = 0;
     private int oldQuestionId = 0;
     private String username;
 

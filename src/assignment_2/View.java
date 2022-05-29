@@ -72,7 +72,7 @@ public class View extends JFrame implements Observer {
         this.helpFrame.dispose();
     }
 
-    private void setGamePanel(String question, String answer, String[] answerArray, int score) {
+    private void setGamePanel(String question, String answer, String[] answerArray, int score, String username) {
         gamePanel.questionTextField.setText(question);
         switch (answer) {
             case "A":
@@ -116,6 +116,7 @@ public class View extends JFrame implements Observer {
                 gamePanel.answer4TextField.setText("D)" + answerArray[3]);
         }
         gamePanel.scoreLabel.setText("" + score);
+        gamePanel.usernameLabel.setText(username);
         gamePanel.repaint();
         gameFrame.add(gamePanel);
 
@@ -161,7 +162,7 @@ public class View extends JFrame implements Observer {
         } else if (!data.started) {
             this.loginFrame.setVisible(false);
             data.started = true;
-            this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
+            this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore, data.username);
             this.showGameView();
 
         } else if (data.quitFlag) {
@@ -177,6 +178,6 @@ public class View extends JFrame implements Observer {
             this.helpFrame.dispose();
         }
 
-        this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore);
+        this.setGamePanel(data.question, data.answer, data.answerArray, data.currentScore, data.username);
     }
 }
